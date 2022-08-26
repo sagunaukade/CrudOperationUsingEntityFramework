@@ -1,0 +1,74 @@
+﻿
+@model EmployeeDetailsApplication.EMPLOYEE
+@{
+    ViewBag.Title = "Employee";
+}
+
+<h2>Add Employee</h2>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd-mm-yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>
+
+}
+
+
+@using (Html.BeginForm("AddEmployee", "Employee", FormMethod.Post))
+{
+
+
+    <div class="container">
+        <div class="form-group">
+
+            <label>Name</label>
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "error" })
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            @Html.ValidationMessageFor(x => x.Address, "", new { @class = "error" })
+
+            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Mobile</label>
+            @Html.ValidationMessageFor(x => x.Mobile, "", new { @class = "error" })
+
+            @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">        
+            <label>DOB</label>
+            @Html.ValidationMessageFor(x => x.DOB, "", new { @class = "error" })
+            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "Employee Date Of Birth", @readonly = "true" } })
+         
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="create">Submit</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+
+        </div>
+
+    </div>
+}

@@ -1,0 +1,38 @@
+﻿@model List<EmployeeDetailsApplication.EMPLOYEE>
+@{
+    ViewBag.Title = "EmployeeList";
+}
+
+<center>
+    <h2><b>EmployeeList</b></h2>
+</center>
+
+<table class="table table-hover">
+    <tr>
+
+        <th>Name</th>
+        <th>Address</th>
+        <th>Mobile</th>
+        <th>DOB</th>
+        <th>Action</th>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>@item.Name</td>
+            <td>@item.Address</td>
+            <td>@item.Mobile</td>
+            <td>@item.DOB.Value.ToString("dd-MM-yyyy")</td>
+            <td>
+
+                <a href="@Url.Action("UpdateEmployee",new {item.Id,item.Name,item.Address,item.Mobile,DOB=item.DOB.Value.ToString("dd-MM-yyyy")})" class="btn btn-success">Edit</a>
+                <a href="@Url.Action("Delete",new { item.Id})" class="btn btn-danger" >Delete</a>
+
+            </td>
+
+        </tr>
+    }
+</table>
